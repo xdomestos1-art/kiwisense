@@ -6302,7 +6302,7 @@ local Library do
 
                     if Window.IsOpen then
                         if not IsMobile then
-                            UserInputService.MouseIconEnabled = false 
+                            UserInputService.MouseIconEnabled = true 
                         end
                     else
                         if not IsMobile then
