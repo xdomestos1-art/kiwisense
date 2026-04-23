@@ -677,6 +677,52 @@ local Library do
         end
     end
 
+
+    local Fonts = {}; do
+        local function RegisterFont(Name, Weight, Style, Asset)
+            if not isfile(Asset.Id) then
+                writefile(Asset.Id, Asset.Font)
+            end
+
+            local Data = {
+                name = Name,
+                faces = {
+                    {
+                        name = "Normal",
+                        weight = Weight,
+                        style = Style,
+                        assetId = getcustomasset(Asset.Id),
+                    },
+                },
+            }
+
+            if not isfile(Name .. ".font") then
+                writefile(Name .. ".font", HttpService:JSONEncode(Data))
+            end
+
+            return getcustomasset(Name .. ".font");
+        end
+
+        local FontNames = {
+            ["ProggyClean"] = "ProggyClean.ttf",
+            ["Tahoma"] = "fs-tahoma-8px.ttf",
+            ["Verdana"] = "Verdana-Font.ttf",
+            ["SmallestPixel"] = "smallest_pixel-7.ttf",
+            ["ProggyTiny"] = "ProggyTiny.ttf",
+            ["Minecraftia"] = "Minecraftia-Regular.ttf",
+            ["Tahoma Bold"] = "tahoma_bold.ttf"
+        }
+
+        for name, suffix in FontNames do 
+            local RegisteredFont = RegisterFont(name, 400, "Normal", {
+                Id = suffix,
+                Font = game:HttpGet("https://github.com/i77lhm/storage/raw/refs/heads/main/fonts/" .. suffix),
+            }) 
+
+            Fonts[name] = Font.new(RegisteredFont, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+        end
+    end
+
     local CustomFont = { } do
         function CustomFont:New(Name, Weight, Style, Data)
             if isfile(Library.Folders.Assets .. "/" .. Name .. ".json") then
