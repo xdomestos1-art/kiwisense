@@ -770,7 +770,7 @@ local Library do
             ["Dark Gradient"] = FromRGB(211, 211, 211),
             ["Inactive Text"] = FromRGB(185, 185, 185),
             ["Element"] = FromRGB(34, 39, 45),
-            ["Accent"] = FromHex("#89CFF0"),
+            ["Accent"] = FromHex("#0096FF"),
             ["Border"] = FromRGB(32, 36, 42)
         },
 
